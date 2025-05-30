@@ -1,11 +1,18 @@
 import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
+import dotenv from "dotenv";
+
+
+dotenv.config();
+
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+app.use(cors({ origin: allowedOrigin }));
+
 app.use(express.json());
 
 app.post("/update-cell", async (req, res) => {
@@ -47,4 +54,3 @@ app.post("/update-cell", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Proxy server running at http://localhost:${PORT}`);
 });
-

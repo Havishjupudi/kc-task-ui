@@ -456,8 +456,13 @@ export default function StaffDashboard() {
     const range = `User1!${col}${rowIndex}`;
     const token = localStorage.getItem("accessToken");
 
+    const BACKEND_URL =
+      process.env.NODE_ENV === "production"
+        ? "https://kc-task-backend.onrender.com"
+        : "http://localhost:3000";
+
     try {
-      const response = await fetch("http://localhost:3000/update-cell", {
+      const response = await fetch(`${BACKEND_URL}/update-cell`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
